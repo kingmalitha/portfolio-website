@@ -1,27 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@200;300;400;500;600;700;800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+@layer base {
+  header {
+    @apply bg-[#111] font-[600] md:text-base lg:text-lg;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  body {
+    @apply font-[Urbanist,sans-serif] text-white   bg-[#111] !scrollbar-thin  !scrollbar-track-transparent !scrollbar-thumb-[#06b6d4];
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer components {
+  .animatied_li {
+    @apply relative before:content-[''] before:absolute before:block before:w-full before:h-[4px] before:bottom-[-4px] before:left-0 before:bg-[#06b6d4]  before:hover:scale-x-100 before:scale-x-0 before:origin-top-left  before:transition before:ease-in-out before:duration-300 before:rounded;
+  }
+
+  .container {
+    @apply mx-auto px-4 max-w-[1400px];
+  }
+
+  .hero-social {
+    @apply flex flex-col items-center hover:text-[#06b6d4];
+  }
+
+  .magic {
+    position: relative;
+    display: inline-block;
+  }
+
+  .magic-star {
+    display: block;
+    position: absolute;
+    height: calc(clamp(20px, 1.5vw, 30px));
+    width: calc(clamp(20px, 1.5vw, 30px));
+    top: var(--star-top);
+    left: var(--star-left);
+    animation: scale 700ms ease forwards;
+  }
+
+  .magic-svg {
+    display: block;
+    opacity: 0.7;
+    animation: rotate 1s linear infinite;
+  }
+
+  .magic-text {
+    animation: background-pan 3s linear infinite;
+    background: linear-gradient(
+      to right,
+      #7b1fa2,
+      #673ab7,
+      #f48fb1,
+      #673ab7,
+      #7b1fa2
+    );
+    background-size: 200%;
+    background-clip: text;
+    color: transparent;
+    white-space: nowrap;
+  }
+}
+
+@keyframes background-pan {
+  from {
+    background-position: 0% center;
+  }
+
+  to {
+    background-position: -200% center;
+  }
+}
+
+@keyframes scale {
+  from,
+  to {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(180deg);
+  }
 }
